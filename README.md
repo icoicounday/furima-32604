@@ -19,7 +19,7 @@
 | condition| references |             |
 | pay      | references |             |
 | area     | references |             |
-| days     | references |             |
+| days     | integer    |             |
 | price    | references |             |
 | seller   | references |             |
 | buyer    | references |             |

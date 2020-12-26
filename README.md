@@ -42,10 +42,10 @@
 | Column    | Type       | Options                     |
 | --------- | ---------- | ----------------------------|
 | item      | references | null:false,foreign_key:true |
-| user   | references | null:false,foreign_key:true |
+| user      | references | null:false,foreign_key:true |
 
 ## Association
-- has_one：users
+- belongs_to：users
 - has_one:addresses
 - belongs_to：item
 
@@ -63,6 +63,4 @@
 | order          | references | null:false,foreign_key:true |
 
 ## Association
-- belongs_to：user
-- has_one:order
-- has_one:items
+- belongs_to:order

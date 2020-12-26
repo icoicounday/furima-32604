@@ -2,94 +2,69 @@
 
 ## users テーブル
 
-| Column         | Type   | Options     |
-| -------------- | ------ | ----------- |
-| name           | string | null: false |
-| email          | string | null: false |
-| password       | string | null: false |
-| last_name      | string | null: false |
-| first_name     | string | null: false |
-| last_name_kana | string | null: false |
-| first_name_kana| string | null: false |
-| birthday       | string | null: false |
+| Column             | Type   | Options                 |
+| ------------------ | ------ | ----------------------- |
+| name               | string | null: false             |
+| email              | string | null: false,unique: true|
+| encrypted_password | string | null: false             |
+| last_name          | string | null: false             |
+| first_name         | string | null: false             |
+| last_name_kana     | string | null: false             |
+| first_name_kana    | string | null: false             |
+| birthday           | date   | null: false             |
+
+## Association
+- has_many：items
+- has_many:orders
+- has_one:address
 
 
 ## items テーブル
 
-| Column   | Type       | Options                     |
-| -------- | ---------- | ----------------------------|
-| name     | string     | null: false                 |
-| text     | text       | null: false                 |
-| category | integer    | null: false                 |
-| condition| integer    | null: false                 |
-| pay      | integer    | null: false                 |
-| area     | integer    | null: false                 |
-| days     | integer    | null: false                 |
-| price    | integer    | null: false                 |
-| buyer    | references | null:false,foreign_key:true |
+| Column      | Type       | Options                     |
+| ----------- | ---------- | ----------------------------|
+| name        | string     | null: false                 |
+| text        | text       | null: false                 |
+| category_id | integer    | null: false                 |
+| condition_id| integer    | null: false                 |
+| pay_id      | integer    | null: false                 |
+| area_id     | integer    | null: false                 |
+| day_id      | integer    | null: false                 |
+| price       | integer    | null: false                 |
+| user_id     | references | null:false,foreign_key:true |
+
+## Association
+- belongs_to：user
+- has_one:order
+- has_one:address
 
 
 ## order テーブル
 
 | Column    | Type       | Options                     |
 | --------- | ---------- | ----------------------------|
-| item      | text       | null: false                 |
-| user      | references | null:false,foreign_key:true |
+| item      | references | null:false,foreign_key:true |
+| user_id   | references | null:false,foreign_key:true |
+
+## Association
+- has_one：users
+- has_one:addresses
+- belongs_to：item
 
 
 ## addresses テーブル
 
 | Column         | Type       | Options                     |
 | -------------- | ---------- | ----------------------------|
-| post_number    | integer    | null: false                 |
-| prefecture_code| integer    | null: false                 |
+| post_number    | string     | null: false                 |
+| prefecture_id  | integer    | null: false                 |
 | city           | string     | null: false                 |
 | house_number   | string     | null: false                 |
-| building_name  | string     | null: false                 |
-| phone_number   | integer    | null: false                 |
-| user_id        | references | null:false,foreign_key:true |
+| building_name  | string     |                             |
+| phone_number   | string     | null: false                 |
+| order_id       | references | null:false,foreign_key:true |
 
-
-<!-- ## images テーブル
-
-| Column    | Type       | Options                          |
-| --------- | ---------- | ---------------------------------|
-| img       | text       | null: false                      |
-| item_id   | references | null:false,foreign_key:true      | -->
-
-
-<!-- ## category テーブル
-
-| Column    | Type       | Options     |
-| --------- | ---------- | ------------|
-| name      | string     | null: false | -->
-
-
-<!-- ## comments テーブル
-
-| Column    | Type       | Options                          |
-| --------- | ---------- | ---------------------------------|
-| comment   | text       | null: false                      |
-| user      | references | null:false,foreign_key:true      |
-| item      | references | null:false,foreign_key:true      | -->
-
-
-<!-- ## profile テーブル
-
-| Column         | Type       | Options                          |
-| -------------- | ---------- | ---------------------------------|
-| last_name      | string     | null: false                      |
-| first_name     | string     | null: false                      |
-| last_name_kana | string     | null: false                      |
-| first_name_kana| string     | null: false                      |
-| birthday       | string     | null: false                      |
-| user_id        | references | null:false,foreign_key:true      | -->
-
-
-<!-- ##  credit_card テーブル
-
-| Column         | Type       | Options                          |
-| -------------- | ---------- | ---------------------------------|
-| user_id        | integer    | null:false,foreign_key:true      |
-| customer_id    | string     | null:false,foreign_key:true      |
-| card_id        | string     | null:false,foreign_key:true      | -->
+## Association
+- belongs_to：user
+- has_one:order
+- has_one:items

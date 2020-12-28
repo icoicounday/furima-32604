@@ -5,15 +5,30 @@ RSpec.describe User, type: :model do
   end
 
   describe 'ユーザー新規登録' do
-    it "nameが空だと登録できない" do
-      @user.name = ""
-      @user.valid?
-      expect(@user.errors.full_messages).to include "Name can't be blank"
+    it "ニックネームが必須であること" do
+      expect(@user).to be_valid
+      by
     end
-    it "emailが空では登録できない" do
-      @user.email = ""
-      @user.valid?
-      expect(@user.errors.full_messages).to include "Email can't be blank"
+    it "メールアドレスが必須であること" do
+      @user.name = "aaaaaa"
+      expect(@user).to be_valid
+    end
+    it "メールアドレスが一意性であること" do
+      @user.password = "000000"
+      @user.password_confirmation = "000000"
+      expect(@user).to be_valid
+    end
+    it "メールアドレスは、@を含む必要があること" do
+    end
+    it "パスワードが必須であること" do
+    end
+    it "パスワードは、6文字以上での入力が必須であること" do
+    end
+    it "パスワードは、半角英数字混合での入力が必須であること" do
+    end
+    it "パスワードは、確認用を含めて2回入力すること" do
+    end
+    it "パスワードとパスワード（確認用）、値の一致が必須であること" do
     end
   end
 end

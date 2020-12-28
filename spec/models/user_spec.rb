@@ -1,12 +1,12 @@
 require 'rails_helper'
+
 RSpec.describe User, type: :model do
-  before do
-    @user = FactoryBot.build(:user)
+  describe '#create' do
+    before do
+      @user = FactoryBot.build(:user)
   end
 
-  describe 'ユーザー新規登録' do
-    context '新規登録がうまくいくとき' do
-      it "nameとemail、passwordとpassword_confirmationが存在すれば登録できること" do
+      it "nameとemail、passwordとpassword_confirmationが存在すれば登録できる" do
         expect(@user).to be_valid
       end
 
@@ -16,21 +16,11 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Name can't be blank")
       end
 
-      it "emailが空では登録できないこと" do
-      @user.email = nil
-      @user.valid?
-      expect(@user.errors.full_messages).to include("Email can't be blank")
+      it "emailが空では登録できない" do
+        @user.email = nil
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email can't be blank")
       end
-
-      it "重複したemailが存在する場合登録できないこと" do
-        @user.save
-        another_user = FactoryBot.build(:user, email: @user.email)
-        another_user.valid?
-        expect(another_user.errors.full_messages).to include("Email has already been taken")
-      end
-
-    it "メールアドレスは、@を含む必要があること" do
-    end
 
       it "passwordが空では登録できないこと" do
         @user.password = nil
@@ -44,16 +34,11 @@ RSpec.describe User, type: :model do
         expect(@user).to be_valid
       end
 
-    it "パスワードは、半角英数字混合での入力が必須であること" do
-    end
-    it "パスワードは、確認用を含めて2回入力すること" do
-    end
-    
       it "passwordとpassword_confirmationが不一致では登録できないこと" do
-        @user.password = "123456"
-        @user.password_confirmation = "1234567"
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+          @user.password = "123456"
+          @user.password_confirmation = "1234567"
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
+    end
   end
-end

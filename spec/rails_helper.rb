@@ -30,6 +30,13 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
+
+# エラーメッセージを英語に設定しましょう
+# 時刻を日本語フォーマットへ変更した際に、標準の言語を日本語にしました。
+# しかし、今回のテストではエラーメッセージは英語で出力します。したがって、RSpecのテスト実行時は標準の言語は英語とします。
+# spec/rails_helper.rbを以下のように編集しましょう。
+I18n.locale = "en"
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

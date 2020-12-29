@@ -12,7 +12,7 @@ describe User do
         expect(@user.errors.full_messages).to include("Password is invalid")
       end
     end
-    
+
     context '新規登録がうまくいかない時' do
       it "nameが空だと登録できない" do
         @user.name = ''
@@ -74,6 +74,11 @@ describe User do
       end
       it "passwordは半角英数字混合での入力でなければ登録できない" do
         @user.password = "ひらがな"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+      it "passwordは半角英字のみでは登録できない" do
+        @user.password = "abcd"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end

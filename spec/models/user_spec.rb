@@ -11,13 +11,6 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid")
       end
-
-      it "passwordが6文字以上であれば登録できる" do
-        @user.password = "000000"
-        @user.password_confirmation = "000000"
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
-      end
     end
 
     context '新規登録がうまくいかない時' do
@@ -27,6 +20,13 @@ describe User do
         expect(@user.errors.full_messages).to include("Name can't be blank")
       end
 
+      it "passwordが6文字以上であれば登録できる" do
+        @user.password = "000000"
+        @user.password_confirmation = "000000"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+      
       it "emailが空では登録できない" do
         @user.email = ""
         @user.valid?

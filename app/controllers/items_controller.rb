@@ -9,9 +9,9 @@ class ItemsController < ApplicationController
 
 
   def create
-    @item = @user.items.new(item_params)
+    @item = Item.new(item_params)
     if @item.save
-      redirect_to item_index_path(@index)
+      redirect_to root_path
     else
       render :index
     end

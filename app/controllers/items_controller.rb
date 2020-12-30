@@ -10,7 +10,11 @@ class ItemsController < ApplicationController
 
   def create
     @item = @user.items.new(item_params)
-    @item.save
+    if @item.save
+      redirect_to item_index_path(@index)
+    else
+      render :index
+    end
   end
 
   private

@@ -3,7 +3,7 @@ FactoryBot.define do
   factory :item do
     name {Faker::Name.name}
     text {"1234"}
-    category_id =  {}
+    category_id {"1234"}
     condition_id {"1234"}
     pay_id {"1234"}
     area_id {"1234"}

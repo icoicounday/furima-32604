@@ -4,8 +4,8 @@ class Item < ApplicationRecord
   has_one_attached :image
   
   with_options presence: true do
-    validates :name
-    validates :text
+    validates :name, presence: true
+    validates :text presence: true
     validates :category_id
     validates :condition_id
     validates :pay_id, format: { with: /\A{1,7}[0-9\d]\z/ }

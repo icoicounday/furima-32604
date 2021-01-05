@@ -8,7 +8,6 @@ RSpec.describe Item, type: :model do
   describe 'アイテムの保存' do
     context "アイテムが保存できる場合" do
       it "全ての情報が存在すれば登録できる" do
-        @item.name = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end

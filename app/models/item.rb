@@ -9,8 +9,8 @@ class Item < ApplicationRecord
   belongs_to :day
   
   with_options presence: true do
-    validates :name, presence: true
-    validates :text, presence: true
+    validates :name
+    validates :text
   end
 
   with_options numericality: { other_than: 1 }do

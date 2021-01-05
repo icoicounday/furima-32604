@@ -2,14 +2,11 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
   has_one_attached :image
-  has_one_attached :name
-  has_one_attached :text
-  has_one_attached :category_id
-  has_one_attached :condition_id
-  has_one_attached :pay_id
-  has_one_attached :area_id
-  has_one_attached :day_id
-  has_one_attached :price
+  belongs_to :category
+  belongs_to :condition
+  belongs_to :pay
+  belongs_to :area
+  belongs_to :day
   
   with_options presence: true do
     validates :name, presence: true

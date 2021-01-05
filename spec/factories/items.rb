@@ -2,13 +2,17 @@ FactoryBot.define do
 
   factory :item do
     name {Faker::Name.name}
-    text {"商品説明"}
+    text {"1234"}
     category_id =  {}
-    condition_id {"新品、未使用"}
-    pay_id {"着払い（購入者負担）"}
-    area_id {"北海道"}
-    day_id {"1日~2日で発送"}
+    condition_id {"1234"}
+    pay_id {"1234"}
+    area_id {"1234"}
+    day_id {"1234"}
     price{11111111}
-    association :user 
+    association :user
+
+    after(:build) do |item|
+      item.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
+    end
   end
 end

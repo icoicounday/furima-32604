@@ -5,12 +5,12 @@ class Item < ApplicationRecord
   
   with_options presence: true do
     validates :name, presence: true
-    validates :text presence: true
+    validates :text, presence: true
     validates :category_id
     validates :condition_id
-    validates :pay_id, { with: /\A{1,7}[0-9\d]\z/ }
+    validates :pay_id
     validates :area_id
     validates :day_id
-    validates :price, format: { with: /\A[0-9\d]\z/ }
+    validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
   end
 end

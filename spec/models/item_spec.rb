@@ -9,7 +9,7 @@ RSpec.describe Item, type: :model do
     context "アイテムが保存できる場合" do
       it "全ての情報が存在すれば登録できる" do
         @item.valid?
-        expect(@item.errors.full_messages).to include("Pay is invalid")
+        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
       end
     end
     
@@ -57,12 +57,22 @@ RSpec.describe Item, type: :model do
       it "価格の範囲がの¥300~¥9,999,999の間でないとアイテムは保存できない" do
         @item.text = "300~9999999"
         @item.valid?
-        expect(@item.errors.full_messages).to include("Pay is invalid")
+        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+      end
+      it "価格が299円以下だと出品できない" do
+        @item.text = "299"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+      end
+      it "価格が10000000円以上だと出品できない" do
+        @item.text = "10000000"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
       end
       it "販売価格は半角数字のみでないとアイテムは保存できない" do
         @item.price = "てすと"
         @item.valid?
-        expect(@item.errors.full_messages).to include("Pay is invalid")
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
     end
   end

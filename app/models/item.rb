@@ -8,9 +8,9 @@ class Item < ApplicationRecord
     validates :text
     validates :category_id
     validates :condition_id
-    validates :pay_id, format: { with: /\A{1,7}[0-9\d]+\z/ }
+    validates :pay_id, format: { with: /\A{1,7}[0-9\d]\z/ }
     validates :area_id
     validates :day_id
-    validates :price
+    validates :price, format: { with: /\A[0-9\d]\z/ }
   end
 end

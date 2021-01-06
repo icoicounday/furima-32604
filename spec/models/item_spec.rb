@@ -14,9 +14,9 @@ RSpec.describe Item, type: :model do
     
     context "アイテムが保存できない場合" do
       it "・・・imageが空では登録できない" do
-        # @item.image = nil
-        # @item.valid?
-        # expect(@item.errors.full_messages).to include("Content can't be blank")
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
       end
       it "nameが空だとアイテムは保存できない" do
         @item.name = ""

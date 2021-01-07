@@ -6,6 +6,7 @@ class Pay < ActiveHash::Base
   ]
 
   include ActiveHash::Associations
+  belongs_to :user
   has_many :items
 
   end

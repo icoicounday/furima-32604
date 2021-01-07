@@ -24,11 +24,6 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    # if user_signed_in?
-    #   @item = Item.show
-    # else
-    #   redirect_to user_session_path(@show.id)
-    # end
   end
 
   private

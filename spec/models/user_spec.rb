@@ -8,8 +8,7 @@ describe User do
   describe 'ユーザー新規登録' do
     context '新規登録がうまくいく時' do
       it "nameとemail、passwordとpassword_confirmationが存在すれば登録できる" do
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user).to be_valid
       end
     end
 
@@ -109,7 +108,7 @@ describe User do
         @user.save
         another_user = FactoryBot.build(:user, email: @user.email)
         another_user.valid?
-        expect(another_user.errors.full_messages).to include("Birthday can't be blank")
+        expect(another_user.errors.full_messages).to include("Email has already been taken")
       end
     end
   end

@@ -18,8 +18,8 @@ RSpec.describe OrderAddress, type: :model do
       it "priceとtokenがあれば保存ができること" do
         expect(@order_address).to be_valid
       end
-
       it "建物名が抜けていても登録できること" do
+        building_name= ""
         expect(@order_address).to be_valid
       end
     end
@@ -38,7 +38,12 @@ RSpec.describe OrderAddress, type: :model do
       it "都道府県が空では登録できない" do
         @order_address.area_id = nil
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Area can't be blank", "Area can't be blank")
+        expect(@order_address.errors.full_messages).to include("Area can't be blank")
+      end
+      it "area_idが0の時登録できない" do
+        @order_address.area_id = 0
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Area can't be blank")
       end
 
       it "市区町村が空では登録できない" do

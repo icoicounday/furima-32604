@@ -23,8 +23,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path unless current_user.id == @item.user_id
-    # 商品が売り切れていたら（商品に紐付いた購入情報があったらを追加
+    if current_user.id == @item.user_id || @item.order.present?
+      return redirect_to root_path
+    end
   end
 
   def update

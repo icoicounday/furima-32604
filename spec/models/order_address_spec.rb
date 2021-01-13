@@ -18,6 +18,10 @@ RSpec.describe OrderAddress, type: :model do
       it "priceとtokenがあれば保存ができること" do
         expect(@order_address).to be_valid
       end
+
+      it "建物名が抜けていても登録できること" do
+        expect(@order_address).to be_valid
+      end
     end
     
     context "購入ができない場合" do
@@ -27,9 +31,9 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include("Post number can't be blank")
       end
       it "郵便番号に-がないとは登録できない" do
-        @order_address.post_number = ""
+        @order_address.post_number = "3200047"
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Post number can't be blank")
+        expect(@order_address.errors.full_messages).to include("Post number is invalid. Include hyphen(-)")
       end
       it "都道府県が空では登録できない" do
         @order_address.area_id = nil
@@ -51,7 +55,7 @@ RSpec.describe OrderAddress, type: :model do
 
 
 
-      it "電話番号がからでは登録できない" do
+      it "電話番号が空では登録できない" do
         @order_address.phone_number = ""
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
@@ -61,11 +65,26 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
       end
+      it "電話番号は英数混合では登録できないこと" do
+        @order_address.phone_number = "a1"
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Phone number is invalid")
+      end
 
       it "tokenが空では登録できないこと" do
         @order_address.token = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
+      end
+      it "item_idが空では登録できない" do
+        @order_address.item_id = ""
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Item can't be blank")
+      end
+      it "user_idが空では登録できない" do
+        @order_address.user_id = ""
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("User can't be blank")
       end
 
     end

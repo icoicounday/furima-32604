@@ -14,10 +14,6 @@ RSpec.describe OrderAddress, type: :model do
       it "全ての情報が存在すれば登録できる" do
         expect(@order_address).to be_valid
       end
-
-      it "priceとtokenがあれば保存ができること" do
-        expect(@order_address).to be_valid
-      end
       it "建物名が抜けていても登録できること" do
         building_name= ""
         expect(@order_address).to be_valid
@@ -66,9 +62,9 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
       end
       it "電話番号は11桁であること" do
-        @order_address.phone_number = ""
+        @order_address.phone_number = "111112222233"
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
+        expect(@order_address.errors.full_messages).to include("Phone number is invalid")
       end
       it "電話番号は英数混合では登録できないこと" do
         @order_address.phone_number = "a1"

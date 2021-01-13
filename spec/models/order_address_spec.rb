@@ -12,7 +12,10 @@ RSpec.describe OrderAddress, type: :model do
   describe '購入ができる場合' do
     context "購入できる場合" do
       it "全ての情報が存在すれば登録できる" do
-        # binding.pry
+        expect(@order_address).to be_valid
+      end
+
+      it "priceとtokenがあれば保存ができること" do
         expect(@order_address).to be_valid
       end
     end
@@ -58,6 +61,13 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
       end
+
+      it "tokenが空では登録できないこと" do
+        @order_address.token = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Token can't be blank")
+      end
+
     end
   end
 end
